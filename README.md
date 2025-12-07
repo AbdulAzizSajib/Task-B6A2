@@ -118,18 +118,11 @@ Create a `.env` file in the root directory:
 
 ```env
 PORT=5000
-NODE_ENV=development
-
 # Database Configuration
-DB_USER=your_db_user
-DB_HOST=localhost
-DB_NAME=vehicle_rental
-DB_PASSWORD=your_db_password
-DB_PORT=5432
+CONNECTION_STRING=your_connection_string_of_NeonDB
 
 # JWT Secret
 JWT_SECRET=your_jwt_secret_key_here
-JWT_EXPIRES_IN=7d
 ```
 
 ### 5. Build the Project
@@ -266,6 +259,7 @@ Task-B6A2/
 ## 👨‍💻 Author
 
 **Abdul Aziz Sajib**
+
 
 ## 📄 License
 
