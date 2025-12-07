@@ -90,7 +90,6 @@ const updateBooking = async (
 ) => {
   const { status } = payload;
 
-  // Get the booking details first
   const bookingResult = await pool.query(
     `SELECT * FROM bookings WHERE id = $1`,
     [id]

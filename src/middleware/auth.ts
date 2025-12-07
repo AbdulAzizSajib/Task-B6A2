@@ -5,7 +5,6 @@ import { config } from "../config/index";
 const auth = (...roles: string[]) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
-      // console.log("roles-------", roles);
       const authHeader = req.headers.authorization;
       if (!authHeader || !authHeader.startsWith("Bearer ")) {
         return res.json({
@@ -20,7 +19,7 @@ const auth = (...roles: string[]) => {
         token as string,
         config.jwtSecret as string
       ) as JwtPayload;
-      // console.log({ decoded });
+
       req.user = decoded;
 
       //["admin"]
