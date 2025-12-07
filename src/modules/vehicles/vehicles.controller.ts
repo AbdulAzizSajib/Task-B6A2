@@ -22,7 +22,6 @@ const createVehicle = async (req: Request, res: Response) => {
   }
 };
 
-// get all vehicles
 const getAllVehicles = async (req: Request, res: Response) => {
   try {
     const result = await vehicleService.getAllVehicles();
@@ -49,7 +48,6 @@ const getAllVehicles = async (req: Request, res: Response) => {
   }
 };
 
-// get vehicle by id
 const getVehicleById = async (req: Request, res: Response) => {
   try {
     const { vehicleId } = req.params;
@@ -78,7 +76,6 @@ const getVehicleById = async (req: Request, res: Response) => {
   }
 };
 
-//update vehicle
 const updateVehicle = async (req: Request, res: Response) => {
   try {
     const { vehicleId } = req.params;
@@ -106,7 +103,6 @@ const updateVehicle = async (req: Request, res: Response) => {
   }
 };
 
-// delete vehicle
 const deleteVehicle = async (req: Request, res: Response) => {
   try {
     const { vehicleId } = req.params;

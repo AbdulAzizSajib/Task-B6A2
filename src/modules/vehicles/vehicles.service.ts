@@ -31,19 +31,16 @@ const createVehicle = async (payload: Record<string, unknown>) => {
   return result;
 };
 
-// get Vehicles
 const getAllVehicles = async () => {
   const result = pool.query(`SELECT * FROM vehicles`);
   return result;
 };
 
-//get vehicles by id
 const getVehicleById = async (id: string) => {
   const result = await pool.query(`SELECT * FROM vehicles WHERE id=$1`, [id]);
   return result;
 };
 
-// update vehicles
 const updateVehicle = async (payload: Record<string, unknown>, id: string) => {
   const {
     vehicle_name,
@@ -53,7 +50,6 @@ const updateVehicle = async (payload: Record<string, unknown>, id: string) => {
     availability_status,
   } = payload;
 
-  // add validation for unique registration number
   const vehicleExists = await pool.query(
     `SELECT * FROM vehicles WHERE registration_number=$1 AND id<>$2`,
     [registration_number, id]
@@ -77,7 +73,6 @@ const updateVehicle = async (payload: Record<string, unknown>, id: string) => {
   return result;
 };
 
-// delete vehicles
 const deleteVehicle = async (id: string) => {
   const result = await pool.query(`DELETE FROM vehicles WHERE id=$1`, [id]);
   return result;

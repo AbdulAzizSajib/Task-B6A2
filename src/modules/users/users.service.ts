@@ -24,7 +24,6 @@ const createUser = async (payload: Record<string, unknown>) => {
   return result;
 };
 
-// get users and remove password from response
 const getAllUsers = async () => {
   const result = await pool.query(
     `SELECT id, name, email, phone, role FROM users `
@@ -33,12 +32,9 @@ const getAllUsers = async () => {
   return result;
 };
 
-//update users
-
 const updateUser = async (payload: Record<string, unknown>, id: string) => {
   const { name, email, password, phone } = payload;
 
-  // validate if user already exists
   const userExists = await pool.query(
     `SELECT * FROM users WHERE email=$1 AND id<>$2`,
     [email, id]

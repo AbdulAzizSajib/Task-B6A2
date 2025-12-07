@@ -8,15 +8,13 @@ import vehicleRouter from "./modules/vehicles/vehicles.routes";
 import bookingRouter from "./modules/bookings/bookings.routes";
 
 const app = express();
-//middleware
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-//database connection
 connectDB();
 
-// health test
 app.get("/health", (req: express.Request, res: express.Response) => {
   res.status(200).send("Server is okay!");
 });
@@ -30,5 +28,5 @@ app.use("/api/v1", authRouter);
 app.use("/api/v1", vehicleRouter);
 app.use("/api/v1", bookingRouter);
 app.listen(config.port, () => {
-  console.log(`Example app listening on port ${config.port}`);
+  console.log(`port ${config.port}`);
 });

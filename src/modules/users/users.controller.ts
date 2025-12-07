@@ -2,7 +2,6 @@ import express from "express";
 
 import { userServices } from "./users.service";
 
-// Create User
 const createUser = async (req: express.Request, res: express.Response) => {
   try {
     const result = await userServices.createUser(req.body);
@@ -28,7 +27,6 @@ const createUser = async (req: express.Request, res: express.Response) => {
   }
 };
 
-// get all users
 const getAllUsers = async (req: express.Request, res: express.Response) => {
   try {
     const result = await userServices.getAllUsers();
@@ -55,8 +53,6 @@ const getAllUsers = async (req: express.Request, res: express.Response) => {
   }
 };
 
-//update user
-
 const updateUser = async (req: express.Request, res: express.Response) => {
   try {
     const { userId } = req.params;
@@ -80,7 +76,6 @@ const updateUser = async (req: express.Request, res: express.Response) => {
   }
 };
 
-// delete user
 const deleteUser = async (req: express.Request, res: express.Response) => {
   try {
     const { userId } = req.params;

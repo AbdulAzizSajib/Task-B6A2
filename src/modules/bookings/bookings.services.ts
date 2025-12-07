@@ -102,19 +102,15 @@ const updateBooking = async (
 
   const booking = bookingResult.rows[0];
 
-  // Customer cancellation logic
   if (userRole === "customer") {
-    // Check if the booking belongs to the customer
     if (booking.customer_id !== userId) {
       throw new Error("You can only cancel your own bookings");
     }
 
-    // Check if status is being changed to cancelled
     if (status !== "cancelled") {
       throw new Error("Customers can only cancel bookings");
     }
 
-    // Check if the booking start date is in the future
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const startDate = new Date(booking.rent_start_date);
@@ -124,7 +120,6 @@ const updateBooking = async (
       throw new Error("You can only cancel bookings before the start date");
     }
 
-    // Update booking to cancelled
     const result = await pool.query(
       `UPDATE bookings SET status = $1 WHERE id = $2 RETURNING *`,
       [status, id]
@@ -133,25 +128,21 @@ const updateBooking = async (
     return { booking: result.rows[0] };
   }
 
-  // Admin logic - mark as returned
   if (userRole === "admin") {
     if (status !== "returned") {
       throw new Error("Admin can only mark bookings as returned");
     }
 
-    // Update booking to returned
     const result = await pool.query(
       `UPDATE bookings SET status = $1 WHERE id = $2 RETURNING *`,
       [status, id]
     );
 
-    // Update vehicle availability to available
     await pool.query(
       `UPDATE vehicles SET availability_status = $1 WHERE id = $2`,
       ["available", booking.vehicle_id]
     );
 
-    // Get updated vehicle info
     const vehicleResult = await pool.query(
       `SELECT availability_status FROM vehicles WHERE id = $1`,
       [booking.vehicle_id]

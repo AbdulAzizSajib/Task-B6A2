@@ -95,7 +95,6 @@ const updateBooking = async (req: Request, res: Response) => {
       userId
     );
 
-    // Different responses based on status
     if (payload.status === "cancelled") {
       res.status(200).json({
         success: true,
